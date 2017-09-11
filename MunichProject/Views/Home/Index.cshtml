@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Hallo!</h1>
+    <p class="lead">This is the 'Munich here I come' project.</p>
+</div>
+
+<div ng-app="myApp" ng-controller="myAppCtrl" class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Singleton Example</h2>
+            <p>An example of using Singleton. The example is about initializing an Auto-Mapper object.</p>
+            <p><a class="btn btn-default" ng-click="showSingletonExampleForm()">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Factorial Calculation</h2>
+            <p>Given x, calculate (x!)</p>
+            <p><a class="btn btn-default" ng-click="showFactorialCalculator()">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Folder size calculator</h2>
+            <p>Given an unknown-depth-level folder structure with files and sub-folders inside, calculate the total size from the root.</p>
+            <p><a class="btn btn-default" ng-click="showFolderSizeCalculator()">Learn more &raquo;</a></p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+
+        <div class="singleton-example col-md-12" ng-show="showSingletonExample">
+            <h3>Perform object mapping</h3>
+            <span>Please fill the form, an instance of the AutoMapper class will be created or reused to map the form object and return a result object</span><br/>
+            <span>Detail implementation can be found in AutoMapperInitialization.cs</span>
+            <div class="form-group">
+                <label class="control-label">First name</label>
+                <input class="form-control" ng-model="singletonExample.firstName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last name</label>
+                <input class="form-control" ng-model="singletonExample.lastName" />
+            </div>
+            <div class="form-group" ng-show="singletonExample.showResult">
+                <label class="control-label">Hi, {{ singletonExample.result.FirstName}} {{singletonExample.result.LastName }}</label>
+            </div>
+            <div class="form-group" ng-show="singletonExample.showErrors">
+                <span class="alert alert-danger">{{singletonExample.errorMessage}}</span>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" ng-click="singletonExample.perform()">Perform</a>
+            </div>
+
+        </div>
+        
+        <div class="factorial-calculator col-md-12" ng-show="showFactorialCalc">
+            <h3>Factorial Calculator</h3>
+            <div class="form-group">
+                <label class="control-label">Please enter a positive integer number (max = 16):</label>
+                <input class="form-control" ng-model="factorialCalc.input" />
+            </div>
+            <div class="form-group" ng-show="factorialCalc.showResult">
+                <label class="control-label">Result: {{factorialCalc.result|number}}</label>
+            </div>
+            <div class="form-group" ng-show="factorialCalc.showErrors">
+                <span class="alert alert-danger">{{factorialCalc.errorMessage}}</span>
+            </div>
+            <div class="form-group">
+                <a class="btn btn-primary" ng-click="factorialCalc.calculate()">Calculate</a>
+            </div>
+
+        </div>
+
+        <div class="folder-size-calculator col-md-12" ng-show="showFolderSizeCalc">
+            <h3>Folder Size Calculator</h3>
+            <div class="form-group">
+                <label class="control-label">The root folder path is: /test/RootFolder</label><br/>
+                <span>Please copy some folders with files to that root folder to test</span><br /><br />
+                <a class="btn btn-primary" ng-click="folderSizeCalc.calculate()">Calculate</a>
+            </div>
+            <div class="form-group" ng-show="folderSizeCalc.showErrors">
+                <span class="alert alert-danger">{{folderSizeCalc.errorMessage}}</span>
+            </div>
+            <div class="form-group" ng-show="folderSizeCalc.showResult">
+                <div class="total-size">
+                    <label class="control-label">Result: {{folderSizeCalc.result.Size|number}} bytes</label>
+                    <p>
+                        <strong>Folder Json:</strong><br/>
+                        <code style="white-space:inherit">{{folderSizeCalc.result.FolderJson}}</code>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+}
